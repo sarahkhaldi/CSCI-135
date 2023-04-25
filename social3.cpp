@@ -100,7 +100,6 @@ int Network::findID(string usrn)
 
 bool Network::addUser(string usrn, string dspn)
 {
- // when putting <= MAX_USERS --> it gave a segmentation fault!!
  if ((numUsers < MAX_USERS) && (findID(usrn) == -1))
  {
   for (int i = 0; i < usrn.length(); i++)
@@ -125,7 +124,8 @@ bool Network::addUser(string usrn, string dspn)
 
 bool Network::follow(string usrn1, string usrn2)
 {
- if ((findID(usrn1) != -1) && (findID(usrn2) != -1) && (findID(usrn1) != findID(usrn2))) // checkign that both users are in the network
+ // checkign that both users are in the network
+ if ((findID(usrn1) != -1) && (findID(usrn2) != -1) && (findID(usrn1) != findID(usrn2)))
  {
   // making usrn1 follow usrn2
   following[(findID(usrn1))][(findID(usrn2))] = true;
