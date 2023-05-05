@@ -29,7 +29,7 @@ int sumRange(int left, int right)
 
 int main()
 {
- // printRange(-2, 10);
+ printRange(-2, 10); // -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 
  int x = sumRange(1, 3);
  cout << "This is " << x << endl; // 6
