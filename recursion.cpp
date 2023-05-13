@@ -2,10 +2,12 @@
 Author: Sarah Khaldi
 Course: CSCI-135
 Instructor: Genady Maryash
-Lab: 13C
+Lab: 13E
 */
 
 #include <iostream>
+#include <cctype>
+#include <string>
 using namespace std;
 
 void printRange(int left, int right)
@@ -40,6 +42,32 @@ int sumArray(int *arr, int size)
  return sum;
 }
 
+bool isAlphanumeric(string s)
+{
+ if (s.length() == 0)
+ {
+  return true;
+ }
+ return (isalpha(s[0]) || isdigit(s[0])) && isAlphanumeric(s.substr(1));
+}
+
+bool nestedParens(string s)
+{
+ if (s.length() == 0)
+ {
+  return true; // string is empty
+ }
+ if (s.length() < 2)
+ {
+  return false; // string too short
+ }
+ if ((s.length() % 2) != 0)
+ {
+  return false; // string is not even length
+ }
+ return ((int(s[0]) == (s[(s.length() - 1)]) - 1) && nestedParens(s.substr(1, s.size() - 2)));
+}
+
 int main()
 {
  printRange(-2, 10); // -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -70,6 +98,19 @@ int main()
  cout << "Sum is " << sum2 << endl; // Sum is 34
 
  delete[] arr; // deallocate it
+
+ cout << isAlphanumeric("ABCD") << endl;        // true (1)
+ cout << isAlphanumeric("Abcd1234xyz") << endl; // true (1)
+ cout << isAlphanumeric("KLMN 8-7-6") << endl;  // false (0)
+
+ cout << nestedParens("((()))") << endl; // true (1)
+ cout << nestedParens("()") << endl;     // true (1)
+ cout << nestedParens("") << endl;       // true (1)
+
+ cout << nestedParens("(((") << endl;   // false (0)
+ cout << nestedParens("(()") << endl;   // false (0)
+ cout << nestedParens(")(") << endl;    // false (0)
+ cout << nestedParens("a(b)c") << endl; // false (0)
 
  return 0;
 }
